@@ -3,6 +3,8 @@ from django.urls import reverse
 from hashids import Hashids
 import datetime
 
+
+
 class EnlaceQuerySet(models.QuerySet):
     # Se decodifica cada código enviado.
     # Se crea variable que almacena llave primaria luego de codificar. Hashids al decodificar devuelve una tupla de un solo elemento.
@@ -21,11 +23,28 @@ class EnlaceQuerySet(models.QuerySet):
     def total_enlaces(self):
         return self.count()
 
-    # Agregaciǿn indica a consulta realizada que se espera una cláusula de suma total del campo contador solicitado para el total de redirecciones realizadas en toda la bd.
+    # Ag gregate indica a consulta realizada que se espera una cláusula de suma total del campo contador solicitado para el total de redirecciones realizadas en toda la bd.
     def total_redirecciones(self):
         return self.aggregate(redirecciones=models.Sum('contador'))
 
+    # el pk se usará para aceptar cada enlace que se le pase.
+    # la función values obtiene valores en forma de diccionarios.
+    # Se le pasa el campo que se quiere llama, que es fecha en este caso.
+    # Annotate es una función como la de aggregate que trabaja sobre cada objeto del querySet aplicando una operación que le indiquemos. Aggregate opera sobre un conjunto del queryset para obtener un valor único, se usó para contar el total de los enlaces.
+    # luego identificaremos el valor de julio con la cláusula Sum la cual recibe los parámetros del contador (Que cuenta cantidad de redirecciones de una fecha a otr)
+    #  y filter con Q, que es para realizar consultas complejas. El primer parámetro de Q es el inicio del contador (filter__gte: >) y 
+    #  Cuando ya tenemos nuestra anotación de la fecha de inicio y la fecha final y la suma total de ese rango colocamos un nuevo filtro
+    # COn el último filtro se filtra tanto la fecha como el contador por cada enlace que se le pasa a la función fecha.
+    # Se queremos escribir más fechas, basta con escribir una , al final de la primera consulta que es julio y agregar los siguinetes meses
+    def fechas(self, pk):
+        return self.values('fecha').annotate(
+            julio=models.Sum('contador', filter=models.Q(
+                filter__gte=datetime.date(2019, 7, 1), filter__Lte=datetime.date(2019, 7, 31)
+                )
+                )
+            ).filter(pk=pk)
 
+ 
 # Creando primer modelo: El enlace 
 class Enlace(models.Model):
     #Columnas de la tabla Enlace:
@@ -63,6 +82,11 @@ class Enlace(models.Model):
             self.codigo = Hashids(min_length=4, alphabet='abcdefghijklmnopqrstuvwxyz').encode(self.pk)
             self.save()
 
-    # Crear url en base a un objeto con la función reverse
+    # Crear url en base a un objeto con la función reverse (modificación del método en el modelo)
+    # se le pasan dos parametros: el primero será la ulr a la que se a redirigido una vez creada la instancia, es decir el nuevo enlace. 'detalle'
+    # El segundo será es un diccionario 
     def get_absolute_url(self):
         return reverse('core:detalle', kwargs={'pk': self.pk})
+
+    # Trabajando la lógica en un modelo utilizando querySet (pue sno hay lógica en vistas, solo se trabaja desde los modelos).
+    #
