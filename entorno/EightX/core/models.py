@@ -60,6 +60,10 @@ class Enlace(models.Model):
     fecha = models.DateField(auto_now_add=True)
     contador = models.PositiveIntegerField(default=0)
 
+    # Se indica al queryset que se trata de un administrador para el modelo.
+
+    enlaces = EnlaceQuerySet.as_manager()
+
     # Sobreescribimos métodos que vienen por defecto al heredar de models
 
     class Meta:
