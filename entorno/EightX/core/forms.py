@@ -16,3 +16,4 @@ class AcortadorForm(forms.ModelForm):
         widgets = {
             'url': forms.URLInput(attrs={'class': 'input is-rounded is medium', 'placeholder': 'URL to cut'})
         }
+    
