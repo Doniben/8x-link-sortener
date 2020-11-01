@@ -47,11 +47,15 @@ class paginaEnlace(DetailView):
         contexto['julio'] = Enlace.enlaces.fechas(self.kwargs['pk'])[0]['julio']
 
 
-#
-class RedirectEnlace():
+# Para la redirección no es necesario pasarle ningún modelo ni niguna redirección, es es solo una vista de redirección.
+# Para que hacer que la vista funcione, se modifica un método heredado que viene de redirect view.
+# REcibe en Kwargs una lista y un diccionario
+# Retornamos un enlace codificado para poder decodificarlo que aparece en nuestro modelo esperando un código para decodificarlo y sumarle 1.
+# se hace igual que en la vista de detaller con self.kwargs['codigo']
+class RedirectEnlace(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         try:
-            return Enlace.enlaces.decode_enlace(senlf.kwargs['codigo'])
+            return Enlace.enlaces.decode_enlace(self.kwargs['codigo'])
         except IndexError:
             print("Decode sin datos")
