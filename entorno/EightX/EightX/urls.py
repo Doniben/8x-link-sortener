@@ -14,8 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# Se crea una nueva función llamada include. Por ella se crea un nuevo path
+# El path es una dirección que coincide tanto en el navegador como con la que se crea dentro del archivo url
+# Al ser iguales se ejecuta la función que se le indica, es decir la vista.
+# Se crea un path con dirección raíz con la función include, indicándole en dǿnde estarán las otras direcciones que coincidirán con la dirección raíz.
+#
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', include('core.urls')),
+    path('a/admin/', admin.site.urls),
 ]
