@@ -16,13 +16,13 @@ from .models import Enlace
 
 class CrearAcortador(CreateView):
     model = Enlace
-    forms_class = AcortadorForm
+    form_class = AcortadorForm
     template_name = 'inicio.html'
 
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
         contexto['total_enlaces'] = Enlace.enlaces.total_enlaces()
-        contecto['total_redirecciones'] = Enlace.enlaces.total_redirecciones()['redirecciones']
+        contexto['total_redirecciones'] = Enlace.enlaces.total_redirecciones()['redirecciones']
         return contexto
 
 
@@ -33,8 +33,8 @@ class CrearAcortador(CreateView):
 # En los modelos fecha espera una llava primaria (pk) enviada por el metodo get_absolute_url en core detalle.
 # En ccbv la vista DEtailView manera el parámetro pk_url_kwarg = 'pk' por defecto puesto que necesita renderizar algo.
 # ese algo es un identificador único en la base de datos, en este caso una primary key.
-# Para obtener el valor de las redirecciones que se hicieron en las fechas de Julio se procede en la posicion 0 puesto que
-# se trata de un querySet. como estamos filtrando por una llave primera obtenemos por lo tanto una sola posiciǿn, la posición 0 y el valor de julio.
+# Para obtener el valor de las redirecciones que se hicieron en las fechas de Noviembre se procede en la posicion 0 puesto que
+# se trata de un querySet. como estamos filtrando por una llave primera obtenemos por lo tanto una sola posiciǿn, la posición 0 y el valor de Noviembre.
 
 
 
@@ -44,7 +44,7 @@ class paginaEnlace(DetailView):
 
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
-        contexto['julio'] = Enlace.enlaces.fechas(self.kwargs['pk'])[0]['julio']
+        contexto['noviembre'] = Enlace.enlaces.fechas(self.kwargs['pk'])[0]['noviembre']
 
 
 # Para la redirección no es necesario pasarle ningún modelo ni niguna redirección, es es solo una vista de redirección.
