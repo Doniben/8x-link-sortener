@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block titulo %} 8x Shortener {% endblock titulo %}
+{% include 'navbar.html' %}
+
+{% block contenido %}
+
+<section id="hero" class="hero is-medium">
+  <div class="hero-body">
+    <div class="container">
+        <h1 class="column is-6 has-text-green has-text-cetered is-size-2 is-size-3-mobile">
+            Yeah! We are not a hacker page, we are just an easy-to-use shortener
+        </h1>
+        <p class="has-text-green">
+            share your 8x-link with your friends and go ahead in the world with your ideas
+        </p>
+          <form method="POST" class="column is-6 buttons is-centered">
+            {% csrf_token %}
+            <div class="field has-addons ">
+              <div class="control" style="margin-top: 20px;">
+                {{ form.url }}
+              </div>
+              <div class="control ">
+                <input type="submit" class="input btn has-mustard-bg" value="Cut!">
+              </div>
+            </div>
+          </form>
+    </div>
+  </div>
+
+</section>
+
+       <!-- Twitter Feed -->
+       <section id="twitter-feed" class="section has-white-mustard-gradient">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64 ">
+                                  {% load static %}
+                                    <img src="{% static 'assets/img/illustrations/twitter-profile-guy.jpg' %}" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>Some guy</strong> <small>@someguy</small> <small>5m</small>
+                                        <br>
+                                        Frist time I used @8x.nl, was like the first time I listened to The Beatles. Christmas came early, I guess.
+                                    </p>
+                                </div>
+                                <nav class="level is-mobile">
+                                    <div class="level-left">
+                                        <a class="level-item" aria-label="reply">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-reply" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                        <a class="level-item" aria-label="retweet">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-retweet" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                        <a class="level-item" aria-label="like">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-64x64 ">
+                                  {% load static %}
+                                    <img src="{% static 'assets/img/illustrations/twitter-profile-girl.jpg' %}" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>Some girl</strong> <small>@somegirl</small> <small>5m</small>
+                                        <br>
+                                        By using 8x.nl you understand that is the answer to all your problems, all praise the #8x.nl!
+                                    </p>
+                                </div>
+                                <nav class="level is-mobile">
+                                    <div class="level-left">
+                                        <a class="level-item" aria-label="reply">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-reply" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                        <a class="level-item" aria-label="retweet">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-retweet" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                        <a class="level-item" aria-label="like">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-heart" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <p class="is-size-7 has-text-centered">See more at #8x.nl</p>
+            
+        </div>
+    </section>
+
+    <div class="column is-6 is-offset-2">
+      <canvas id="myChart"></canvas>
+    </div>
+    <!-- END Twitter Feed -->
+
+<script>
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Enlaces", "Redirecciones"],
+      datasets: [
+        {
+          backgroundColor: ["#1E4132", "#3e95cd"],
+          data: ["{{ total_enlaces }}", "{{ total_redirecciones }}"]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+
+
+{% endblock contenido %}
