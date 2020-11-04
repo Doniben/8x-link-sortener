@@ -10,3 +10,5 @@ source 8x-link-sortener/entorno/bin/activate
 python manage.py makemigrations core
 
 python manage.py migrate
+
+python manage.py createsuperuser
