@@ -7,7 +7,7 @@
       <div class="column is-4 is-offset-4">
         <div class="tags has-addons">
           <a href="{% url 'core:redirect' codigo=object.codigo %}" class="tag is-large">{{ request.META.HTTP_HOST }}</a>
-          <span class="tag is-info is-large">{{ object.codigo }}</span>
+          <span class="tag is-warning is-large">{{ object.codigo }}</span>
         </div>
       </div>
     </div>
@@ -24,8 +24,8 @@
       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
       datasets: [{
         label: 'Redirecciones',
-        backgroundColor: 'rgb(32, 156, 238)',
-        borderColor: 'rgb(32, 156, 238)',
+        backgroundColor: 'rgb(30, 65, 50)',
+        borderColor: 'rgb(30, 65, 50)',
         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "{{ noviembre }}", 0]
       }]
     },
