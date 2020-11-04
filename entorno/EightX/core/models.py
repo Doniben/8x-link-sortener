@@ -14,7 +14,7 @@ class EnlaceQuerySet(models.QuerySet):
     # se devuelve la url en sí. Se consulta por la pk.
     # siempre se obtiene el primer elemento porque solo existe una vez en la base de datos. solo nos interesa la url.
     def decode_enlace(self, codigo):
-        decode = Hashids(min_length=4, alphabet='abcdefghijklmnopqrstuvwxyz').decode(codigo)[0]
+        decode = Hashids(min_length=1, alphabet='abcdefghijklmnopqrstuvwxyz').decode(codigo)[0]
         self.filter(pk=decode).update(contador=models.F('contador') + 1)
         return self.filter(pk=decode).first().url
 
@@ -39,9 +39,7 @@ class EnlaceQuerySet(models.QuerySet):
     def fechas(self, pk):
         return self.values('fecha').annotate(
             noviembre=models.Sum('contador', filter=models.Q(
-                fecha__gte=datetime.date(2020, 11, 1), fecha__lte=datetime.date(2020, 11, 30)
-                )
-                )
+                fecha__gte=datetime.date(2020, 11, 1), fecha__lte=datetime.date(2020, 11, 30)))
             ).filter(pk=pk)
 
  
@@ -73,7 +71,7 @@ class Enlace(models.Model):
     # El método se crea cuando creamos un nuevo modelo. De no ser así, al realizar una consulta desde la terminal o el administrador aparecería error que no permite identificar los objetos.
     # Para visualizarlo se usará el formato "URL + Código"
     def __str__(self):
-        return f"URL: {self.url} codigo: {self.codigo}"
+        return f"URL: {self.url} Codigo: {self.codigo}"
 
     # el método save crea un nuevo objeto dentro de la base de datos cada vez que se le llama.
     # Generamos el código en base a una llave primaria que se genera en cada enlace. Se debe crear justo despues de crearse la llave primaria.
@@ -83,7 +81,7 @@ class Enlace(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         if not self.codigo:
-            self.codigo = Hashids(min_length=4, alphabet='abcdefghijklmnopqrstuvwxyz').encode(self.pk)
+            self.codigo = Hashids(min_length=1, alphabet='abcdefghijklmnopqrstuvwxyz').encode(self.pk)
             self.save()
 
     # Crear url en base a un objeto con la función reverse (modificación del método en el modelo)
