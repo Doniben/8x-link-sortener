@@ -5632,7 +5632,7 @@ fieldset[disabled] .select select:hover {
 }
 
 .file.is-large .file-icon .fa {
-    font-size: 28px
+    font-size: 50px
 }
 
 .file.has-name .file-cta {
@@ -7864,7 +7864,7 @@ a.navbar-item:hover {
 }
 
 .navbar-item img {
-    max-height: 1.75rem
+    max-height: 2.75rem
 }
 
 .navbar-item.has-dropdown {
