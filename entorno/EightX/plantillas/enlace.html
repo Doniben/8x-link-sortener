@@ -6,9 +6,22 @@
     <div class="columns">
       <div class="column is-4 is-offset-4">
         <div class="tags has-addons">
-          <a href="{% url 'core:redirect' codigo=object.codigo %}" class="tag is-large">{{ request.META.HTTP_HOST }}</a>
-          <span class="tag is-warning is-large">{{ object.codigo }}</span>
+          <a href="{% url 'core:redirect' codigo=object.codigo %}" class="tag is-large" id="shortedLink">{{ request.META.HTTP_HOST }}</a>
+          <span class="tag is-warning is-large">/{{ object.codigo }}</span>
         </div>
+      </div>
+      <div class="column is-2">
+        <input style="border: none; text-align:center;" class="tag is-normal has-text-green" type="text" value="{{ request.META.HTTP_HOST }}{% url 'core:redirect' codigo=object.codigo %}" id="myInput">
+        <button class="button has-green-bg is-outlined has-text-white" onclick="myFunction()">Copy your 8x-Link</button>
+        <script>
+          function myFunction() {
+            var copyText = document.getElementById("myInput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Shortened Link copied: " + copyText.value);
+          }
+          </script>
       </div>
     </div>
     <div class="box">
