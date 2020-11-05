@@ -45,6 +45,7 @@ class paginaEnlace(DetailView):
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
         contexto['noviembre'] = Enlace.enlaces.fechas(self.kwargs['pk'])[0]['noviembre']
+        return contexto
 
 
 # Para la redirección no es necesario pasarle ningún modelo ni niguna redirección, es es solo una vista de redirección.
