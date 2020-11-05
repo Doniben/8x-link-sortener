@@ -11,7 +11,7 @@
             Be more social by shorting your links
         </h1>
         <p class="has-text-green">
-            share your 8x-link with your friends and go ahead in the world with your ideas
+            share your 8x-link with your friends and go across the universe with your ideas
         </p>
           <form method="POST" class="column is-6 buttons is-centered">
             {% csrf_token %}
@@ -45,7 +45,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>Some guy</strong> <small>@someguy</small> <small>5m</small>
+                                        <strong>Explorer</strong> <small>@explorer</small> <small>5m</small>
                                         <br>
                                         Frist time I used @8x.social, was like the first time I listened to The Beatles. Christmas came early, I guess.
                                     </p>
@@ -85,7 +85,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <strong>Some girl</strong> <small>@somegirl</small> <small>5m</small>
+                                        <strong>Andromeda</strong> <small>@fromandromeda</small> <small>10m</small>
                                         <br>
                                         By using 8x.social you understand that is the answer to all your problems, all praise the #8x.social!
                                     </p>
@@ -118,21 +118,123 @@
             
         </div>
     </section>
-
-    <div class="column is-6 is-offset-2">
-      <canvas id="myChart"></canvas>
-    </div>
     <!-- END Twitter Feed -->
+    <!-- Features -->
+    <section id="features" class="section has-mustard-bg">
+      <div class="container">
+          <div class="columns">
+              <div class="column is-4">
+                  <h3 class="is-size-3 has-text-green">
+                      Statistics show how sociable we are
+                  </h3>
+                  <p class="has-text-green paragraph">
+                      Be as sociable as nobody can imagine. Create 8x-Links and control here how many of them 
+                      we all have reached and how many redirections we have gotten. The more 8x-Links and redirections we
+                      have, the more sociable we are.
+                  </p>
+              </div>
+              <div class="column is-6 is-offset-2">
+                  <canvas id="myChart"></canvas>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="container">
+          <div class="columns">
+
+              <div class="column">
+                {% load static %}
+                  <img class="feature-img" src="{% static 'assets/img/illustrations/feature2.png' %}" alt="feature" />
+              </div>
+              <div class="column">
+                  <h3 class="is-size-3 has-text-green">
+                      Take control of your own universe</h3>
+                  <p class="has-text-green paragraph">
+                    While we create the an admin dashboard you can read Statistics of you own 8x-Links.
+                    Just keep in mind the id number of your shortened link. Visit 8x.social/[your 8x-link ID] when you want to know
+                    How many of your frinds visited your shared link.
+                  </p>
+              </div>
+
+          </div>
+      </div>
+      <div class="container">
+          <div class="columns reverse-row-order">
+
+              <div class="column">
+                  <h3 class="is-size-3 has-text-green">
+                    Share your experiences</h3>
+                  <h3 class="is-size-3 has-text-green">
+                      using 8x.social</h3>
+                  <p class="has-text-green paragraph">
+                      
+                  </p>
+              </div>
+              <div class="column">
+                <div class="field">
+                  <label class="label has-text-green">Your Name or Alias</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input is-warning" type="text" placeholder="Amelia Earhart">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label has-text-green">Your e-mail</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input is-warning" type="text" placeholder="amelia@mail.com">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                      <i class="fas fa-check"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <textarea class="textarea is-warning" placeholder="What was your experience?"></textarea>
+                  </div>
+                </div>
+                <button class="btn has-green-bg is-size-6 has-text-white column is-3">
+                  SEND
+                </button>
+              </div>
+          </div>
+      </div>
+    </section>
+  <!-- END Features -->
+  <!-- Footer -->
+  <section id="footer" class="section has-green-bg">
+    <div class="container has-text-centered">
+        <a href="https://twitter.com/programistonto" class="is-size-4 social-link">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://github.com/doniben" class="is-size-4 social-link">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/doniben" class="is-size-4 social-link">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <p class="has-text-white is-size-7">
+            Built with <i class="fas fa-heart"></i> by <a href="https://doniben.tech"><b>doniben.tech</b> © 2020</a>
+        </p>
+    </div>
+    </section>
 
 <script>
   var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Enlaces", "Redirecciones"],
+      labels: ["Created 8x-Links", "Redirections Made"],
       datasets: [
         {
-          backgroundColor: ["#1E4132", "#3e95cd"],
+          backgroundColor: ["#1E4132", "1E4132"],
           data: ["{{ total_enlaces }}", "{{ total_redirecciones }}"]
         }
       ]
@@ -149,7 +251,4 @@
     }
   });
 </script>
-
-
-
 {% endblock contenido %}
