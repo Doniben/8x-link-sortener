@@ -4,11 +4,11 @@
       <div class="container">
           <div class="navbar-brand">
             <a href="{% url 'core:inicio' %}" class="navbar-item" style="padding-left: 0px;">
-            </a> {% load static %} <img src="{% static 'assets/img/8x_social.png' %}" width="115" height="70" alt="8x logo">
+              {% load static %} <img class="is-large" src="{% static 'assets/img/8x_social.png' %}" alt="8x logo"></a>
           </div>
           <div class="navbar-menu">
             <div class="navbar-end">
-              <a class="navbar-item has-text-green a-menu">
+              <a href="/" class="navbar-item has-text-green a-menu">
                 HOME
               </a>
               <a class="navbar-item has-text-green a-menu">
