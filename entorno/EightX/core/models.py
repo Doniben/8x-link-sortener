@@ -37,10 +37,20 @@ class EnlaceQuerySet(models.QuerySet):
     # COn el último filtro se filtra tanto la fecha como el contador por cada enlace que se le pasa a la función fecha.
     # Se queremos escribir más fechas, basta con escribir una , al final de la primera consulta que es noviembre y agregar los siguinetes meses
     def fechas(self, pk):
+    # Obtén la fecha actual
+        fecha_actual = datetime.datetime.now()
+
+        # Calcula el primer día del mes actual
+        primer_dia_mes_actual = fecha_actual.replace(day=1)
+
+        # Calcula el último día del mes actual
+        ultimo_dia_mes_actual = (fecha_actual.replace(day=28) + datetime.timedelta(days=4)).replace(day=1) - datetime.timedelta(days=1)
+
+        # Utiliza las fechas calculadas para la anotación y el filtro
         return self.values('fecha').annotate(
-            noviembre=models.Sum('contador', filter=models.Q(
-                fecha__gte=datetime.date(2020, 11, 1), fecha__lte=datetime.date(2020, 11, 30)))
-            ).filter(pk=pk)
+            total_redirecciones=models.Sum('contador', filter=models.Q(
+                fecha__gte=primer_dia_mes_actual, fecha__lte=ultimo_dia_mes_actual))
+        ).filter(pk=pk)
 
  
 # Creando primer modelo: El enlace 
