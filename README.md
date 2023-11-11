@@ -1,39 +1,56 @@
-
-
 # 8x-link-sortener
-8x.social is a Link Shortener created to give a tool for different social, cultural, politic and educational institutions.
 
-### Instala geopandas y hashids
-python3.8 -m pip install geopandas hashids
+8x.social is a Link Shortener created to provide a tool for various social, cultural, political, and educational institutions.
 
-### Crea y activa el entorno virtual
+## Getting Started
+
+### Prerequisites
+
+Make sure you have Python 3.8 or later installed.
+
+### Installation
+
+```bash
+# Create and activate a virtual environment
 python -m venv .env
 source .env/bin/activate
 
-### Instala las dependencias
-pip install -r requirements.txt
-
-### Instala las dependencias
-
+# Navigate to the project directory
 cd EightX
 
-python manage.py makemigrations core
+# Install dependencies
+pip install -r requirements.txt
+```
 
+### Database Setup
+
+```bash
+# Apply database migrations
+python manage.py makemigrations core
 python manage.py migrate
 
+# Create a superuser
 python manage.py createsuperuser
 
+# Collect static files
 python manage.py collectstatic
+```
 
+### Run the Application
+
+```bash 
+# Install Gunicorn (if not installed)
 pip install gunicorn
 
-pip run gunicorn EightX.wsgi:application --bind=0.0.0.0:8000
+# Start the application
+gunicorn EightX.wsgi:application --bind=0.0.0.0:8000
+```
 
+### configuración supervisor en local
 sudo apt install supervisor
 
 sudo emacs /etc/supervisor/conf.d/8x.social.conf
 
-#### configuración supervisor en local
 
 ```
 [program:8x-social]
