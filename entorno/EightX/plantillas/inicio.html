@@ -8,10 +8,10 @@
   <div class="hero-body">
     <div class="container">
         <h1 class="column is-6 has-text-green has-text-cetered is-size-2 is-size-3-mobile">
-            Be more social by shorting your links
+          Enhance your social presence by shortening your links.
         </h1>
         <p class="has-text-green">
-            share your 8x-link with your friends and go across the universe with your ideas
+          Share your 8x-Link with friends and let your ideas traverse the universe.
         </p>
           <form method="POST" class="column is-6 buttons is-centered">
             {% csrf_token %}
@@ -128,9 +128,7 @@
                       Statistics show how sociable we are
                   </h3>
                   <p class="has-text-green paragraph">
-                      Be as sociable as nobody can imagine. Create 8x-Links and control here how many of them 
-                      we all have reached and how many redirections we have gotten. The more 8x-Links and redirections we
-                      have, the more sociable we are.
+                    Be as sociable as one can imagine! Create 8x-Links and monitor how many of them we collectively reach and the number of redirections they receive. The greater the count of 8x-Links and redirections, the more sociable we become.
                   </p>
               </div>
               <div class="column is-6 is-offset-2">
@@ -150,9 +148,7 @@
                   <h3 class="is-size-3 has-text-green">
                       Take control of your own universe</h3>
                   <p class="has-text-green paragraph">
-                    While we create the an admin dashboard you can read Statistics of you own 8x-Links.
-                    Just keep in mind the id number of your shortened link. Visit 8x.social/[your 8x-link ID] when you want to know
-                    How many of your frinds visited your shared link.
+                    While we're working on developing an admin dashboard, you can explore statistics for your own 8x-Links. Simply remember the ID number associated with your shortened link and visit 8x.social/[your 8x-link ID] whenever you'd like to see how many of your friends have visited your shared link.
                   </p>
               </div>
 
@@ -171,38 +167,61 @@
                   </p>
               </div>
               <div class="column">
-                <div class="field">
-                  <label class="label has-text-green">Your Name or Alias</label>
-                  <div class="control has-icons-left has-icons-right">
-                    <input class="input is-warning" type="text" placeholder="Amelia Earhart">
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-user"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-check"></i>
-                    </span>
+                <form
+                  class="contact_form"
+                  action="https://formspree.io/f/mwkdvlrd"
+                  method="POST"
+                >
+                  <div class="field">
+                    <label class="label has-text-green">Your Name or Alias</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input is-warning"
+                        type="text"
+                        name="name"
+                        placeholder="Amelia Earhart"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                      </span>
+                      <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div class="field">
-                  <label class="label has-text-green">Your e-mail</label>
-                  <div class="control has-icons-left has-icons-right">
-                    <input class="input is-warning" type="text" placeholder="amelia@mail.com">
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                      <i class="fas fa-check"></i>
-                    </span>
+                  <div class="field">
+                    <label class="label has-text-green">Your e-mail</label>
+                    <div class="control has-icons-left has-icons-right">
+                      <input
+                        class="input is-warning"
+                        type="email"
+                        name="email"
+                        placeholder="amelia@mail.com"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                      </span>
+                      <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div class="field">
-                  <div class="control">
-                    <textarea class="textarea is-warning" placeholder="What was your experience?"></textarea>
+                  <div class="field">
+                    <div class="control">
+                      <textarea
+                        class="textarea is-warning"
+                        name="message"
+                        placeholder="What was your experience?"
+                      ></textarea>
+                    </div>
                   </div>
-                </div>
-                <button class="btn has-green-bg is-size-6 has-text-white column is-3">
-                  SEND
-                </button>
+                  <button
+                    type="submit"
+                    class="btn has-green-bg is-size-6 has-text-white column is-3"
+                  >
+                    SEND
+                  </button>
+                </form>
               </div>
           </div>
       </div>
