@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Se crea una nueva función llamada include. Por ella se crea un nuevo path
 # El path es una dirección que coincide tanto en el navegador como con la que se crea dentro del archivo url
@@ -27,3 +29,6 @@ urlpatterns = [
     path('', include('core.urls')),
     path('a/admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
