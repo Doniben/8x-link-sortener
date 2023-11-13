@@ -17,6 +17,11 @@
               <a class="navbar-item has-text-green a-menu">
                 USERS
               </a>
+              <div>
+                <a href="{% url 'set_language' %}?language_code=es"><img src="{% static 'assets/img/colombia-flag.png' %}" alt="Spanish"></a>
+                <a href="{% url 'set_language' %}?language_code=eo"><img src="{% static 'assets/img/esperanto-flag.png' %}" alt="Esperanto"></a>
+                <a href="{% url 'set_language' %}?language_code=en"><img src="{% static 'assets/img/colombia-flag.png' %}" alt="English"></a>
+              </div>
             </div>
           </div>
           <span class="navbar-burger burger" data-target="navbarMenuHeroA">
