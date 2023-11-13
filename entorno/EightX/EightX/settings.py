@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'EightX.urls'
@@ -118,6 +119,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+LANGUAGE_CODE = 'es'  # Establece el idioma predeterminado
+TIME_ZONE = 'UTC'  # Configura la zona horaria
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+LANGUAGES = [
+    ('es', ('Spanish')),
+    ('en', ('English')),
+    ('eo', ('Esperanto')),
+]
 
 
 STATIC_URL = '/static/'
