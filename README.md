@@ -36,6 +36,16 @@ python manage.py createsuperuser
 python manage.py collectstatic
 ```
 
+### Generar archivos de traducción:
+Ejecuta los siguientes comandos para crear archivos de traducción y traducir tus cadenas:
+
+```bash
+python manage.py makemessages -l es  # para español
+python manage.py makemessages -l en  # para inglés
+python manage.py makemessages -l eo  # para esperanto
+python manage.py compilemessages
+```
+
 ### Run the Application
 
 ```bash 
