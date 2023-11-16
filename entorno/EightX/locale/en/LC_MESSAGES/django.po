@@ -4,14 +4,21 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
-msgid "HOME"
-msgstr "HOME"
 
-msgid "ABOUT"
-msgstr "ABOUT"
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: esn\n"
 
-msgid "USERS"
-msgstr "USERS"
+msgid "HOME\n"
+msgstr "HOME\n"
+
+msgid "ABOUT\n"
+msgstr "ABOUT\n"
+
+msgid "USERS\n"
+msgstr "USERS\n"
+
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-16 01:07+0000\n"
@@ -25,13 +32,13 @@ msgstr "USERS"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: EightX/settings.py:131
-msgid "Spanish"
-msgstr "Spanish"
+msgid "Spanish\n"
+msgstr "Spanish\n"
 
 #: EightX/settings.py:132
-msgid "English"
-msgstr "English"
+msgid "English\n"
+msgstr "English\n"
 
 #: EightX/settings.py:133
-msgid "Esperanto"
-msgstr "Esperanto"
+msgid "Esperanto\n"
+msgstr "Esperanto\n"
