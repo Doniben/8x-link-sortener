@@ -1,63 +1,155 @@
+{% load i18n %}
 <section id="hero" class="hero is-medium">
   <div class="hero-head">
     <nav class="navbar">
       <div class="container">
-          <div class="navbar-brand">
-            <a href="{% url 'core:inicio' %}" class="navbar-item" style="padding-left: 0px;">
-              {% load static %} <img class="is-large" src="{% static 'assets/img/8x_social.png' %}" alt="8x logo"></a>
-          </div>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <a href="/" class="navbar-item has-text-green a-menu">
-                HOME
-              </a>
-              <a class="navbar-item has-text-green a-menu">
-                ABOUT
-              </a>
-              <a class="navbar-item has-text-green a-menu">
-                USERS
-              </a>
-              <div class="dropdown is-hoverable">
-                <div class="dropdown-trigger">
-                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                    <!-- Icono de la bandera del idioma actual -->
-                    {% if LANGUAGE_CODE == 'es' %}
-                      <img src="{% static 'assets/img/illustrations/colombia-flag.png' %}" alt="Spanish" style="width: 20px;">
-                    {% elif LANGUAGE_CODE == 'eo' %}
-                      <img src="{% static 'assets/img/illustrations/esperanto-flag.png' %}" alt="Esperanto" style="width: 20px;">
-                    {% elif LANGUAGE_CODE == 'en' %}
-                      <img src="{% static 'assets/img/illustrations/eeuu-flag.png' %}" alt="English" style="width: 20px;">
-                    {% else %}
-                      <!-- Por defecto, mostrar la bandera de Estados Unidos -->
-                      <img src="{% static 'assets/img/illustrations/eeuu-flag.png' %}" alt="English" style="width: 20px;">
-                    {% endif %}
-                    <!-- Icono de flecha hacia abajo -->
-                    <span class="icon is-small">
-                      <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </button>
-                </div>
-                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div class="dropdown-content">
-                    <a href="{% url 'set_language' %}?language_code=es" class="dropdown-item">
-                      <img src="{% static 'assets/img/illustrations/colombia-flag.png' %}" alt="Spanish" style="width: 20px;">
-                    </a>
-                    <a href="{% url 'set_language' %}?language_code=eo" class="dropdown-item">
-                      <img src="{% static 'assets/img/illustrations/esperanto-flag.png' %}" alt="Esperanto" style="width: 20px;">
-                    </a>
-                    <a href="{% url 'set_language' %}?language_code=en" class="dropdown-item">
-                      <img src="{% static 'assets/img/illustrations/eeuu-flag.png' %}" alt="English" style="width: 20px;">
-                    </a>
+        <div class="navbar-brand">
+          <a
+            href="{% url 'core:inicio' %}"
+            class="navbar-item"
+            style="padding-left: 0px"
+          >
+            {% load static %}
+            <img
+              class="is-large"
+              src="{% static 'assets/img/8x_social.png' %}"
+              alt="8x logo"
+          /></a>
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a href="/" class="navbar-item has-text-green a-menu">
+              {% trans "HOME" %}
+            </a>
+            <a class="navbar-item has-text-green a-menu">
+              {% trans "ABOUT" %}
+            </a>
+            <a class="navbar-item has-text-green a-menu">
+              {% trans "USERS" %}
+            </a>
+            <div class="dropdown is-hoverable is-borderless">
+              <div class="dropdown-trigger">
+                <button
+                  class="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                >
+                  <!-- Icono de la bandera del idioma actual -->
+                  {% if LANGUAGE_CODE == 'es' %}
+                  <img
+                    src="{% static 'assets/img/illustrations/colombia-flag.png' %}"
+                    alt="Spanish"
+                    style="width: 20px"
+                  />
+                  {% elif LANGUAGE_CODE == 'eo' %}
+                  <img
+                    src="{% static 'assets/img/illustrations/esperanto-flag.png' %}"
+                    alt="Esperanto"
+                    style="width: 20px"
+                  />
+                  {% elif LANGUAGE_CODE == 'en' %}
+                  <img
+                    src="{% static 'assets/img/illustrations/eeuu-flag.png' %}"
+                    alt="English"
+                    style="width: 20px"
+                  />
+                  {% else %}
+                  <!-- Por defecto, mostrar la bandera de Estados Unidos -->
+                  <img
+                    src="{% static 'assets/img/illustrations/eeuu-flag.png' %}"
+                    alt="English"
+                    style="width: 20px"
+                  />
+                  {% endif %}
+                  <!-- Icono de flecha hacia abajo -->
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <div class="dropdown-item is-hoverable">
+                    <div class="columns is-narrow">
+                      <form
+                        action="{% url 'set_language' %}"
+                        method="post"
+                        class="dropdown-item is-hoverable"
+                      >
+                        {% csrf_token %}
+                        <input
+                          name="next"
+                          type="hidden"
+                          value="{{ request.path }}"
+                        />
+                        <button
+                          type="submit"
+                          name="language"
+                          value="es"
+                          class="button is-text"
+                        >
+                          <div class="columns is-narrow">
+                            <div class="column is-narrow">
+                              <img
+                                src="{% static 'assets/img/illustrations/colombia-flag.png' %}"
+                                alt="Spanish"
+                                style="width: 20px"
+                              />
+                            </div>
+                            <div class="column">Spanish</div>
+                          </div>
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="dropdown-item is-hoverable">
+                    <div class="columns is-narrow">
+                      <div class="column is-narrow">
+                        <img
+                          src="{% static 'assets/img/illustrations/esperanto-flag.png' %}"
+                          alt="Esperanto"
+                          style="width: 20px"
+                        />
+                      </div>
+                      <div class="column is-narrow">
+                        <a
+                          class="has-text-weight-bold is-clickable"
+                          href="{% url 'set_language' %}?language_code=eo"
+                        >
+                          Esperanto
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown-item is-hoverable">
+                    <div class="columns is-narrow">
+                      <div class="column is-narrow">
+                        <img
+                          src="{% static 'assets/img/illustrations/eeuu-flag.png' %}"
+                          alt="English"
+                          style="width: 20px"
+                        />
+                      </div>
+                      <div class="column is-narrow">
+                        <a
+                          class="has-text-weight-bold is-clickable"
+                          href="{% url 'set_language' %}?language_code=en"
+                        >
+                          English
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>                           
+              </div>
             </div>
           </div>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
+        </div>
+        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </div>
     </nav>
   </div>
