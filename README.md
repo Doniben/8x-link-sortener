@@ -46,6 +46,11 @@ python manage.py makemessages -l eo  # para esperanto
 python manage.py compilemessages
 ```
 
+#### If errors with .mo files
+```bash
+find . -name "*.mo" -type f -delete
+```
+
 ### Run the Application
 
 ```bash 
