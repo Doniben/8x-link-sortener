@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 from .forms import AcortadorForm
 from .models import Enlace
 from datetime import datetime
+from django.http import HttpResponse
 
 # Se crea la primera vista y se hereda de CreateView y se le pasan 3 propiedades
 # asignamos el Enlace
@@ -53,7 +54,13 @@ class paginaEnlace(DetailView):
         fecha_actual_formateada = fecha_actual.strftime('%Y-%m-%d')
 
         # Accede al valor dinámico según la fecha actual formateada
-        contexto['total_redirecciones'] = Enlace.enlaces.fechas(self.kwargs['pk']).filter(fecha=fecha_actual_formateada).first()['total_redirecciones']
+        queryset = Enlace.enlaces.fechas(self.kwargs['pk']).filter(fecha=fecha_actual_formateada).order_by('fecha')
+        primer_elemento = queryset.first()
+
+        if primer_elemento:
+            contexto['total_redirecciones'] = primer_elemento['total_redirecciones']
+        else:
+            contexto['total_redirecciones'] = 0 
 
         return contexto
 
@@ -70,3 +77,11 @@ class RedirectEnlace(RedirectView):
             return Enlace.enlaces.decode_enlace(self.kwargs['codigo'])
         except IndexError:
             print("Decode sin datos")
+
+def set_session(request):
+    request.session['test_key'] = 'test_value'
+    return HttpResponse("Sesión establecida con éxito.")
+
+def get_session(request):
+    value = request.session.get('test_key', 'No encontrado')
+    return HttpResponse(f"Valor en sesión: {value}")
