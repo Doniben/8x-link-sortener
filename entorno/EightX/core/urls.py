@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CrearAcortador, paginaEnlace, RedirectEnlace
+from .views import CrearAcortador, paginaEnlace, RedirectEnlace, set_session, get_session
 
 # Se usa la propiedad app_name para identificar las redirecciones que se crean dentro de cada aplicaciǿn de forma legible,
 # evitando confuciones cuando tenemos muchas aplicaciones.
@@ -14,4 +14,6 @@ urlpatterns = [
     path('', CrearAcortador.as_view(), name='inicio'),
     path('<int:pk>/', paginaEnlace.as_view(), name='detalle'),
     path('<str:codigo>/', RedirectEnlace.as_view(), name='redirect'),
+    path('set_session/', set_session, name='set_session'),
+    path('get_session/', get_session, name='get_session'),
 ]
