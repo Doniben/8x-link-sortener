@@ -27,9 +27,9 @@ from django.views.i18n import set_language
 
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', include('core.urls')),
     path('a/admin/', admin.site.urls),
-    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 if settings.DEBUG:
