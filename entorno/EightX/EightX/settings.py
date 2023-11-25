@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'core.middleware.AcortadorI18nMiddleware',
     'django.middleware.locale.LocaleMiddleware',
 ]
 
@@ -60,6 +61,22 @@ INTERNAL_IPS = [
 ]
 
 ROOT_URLCONF = 'EightX.urls'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # Cambia esto a 'INFO' para menos detalle
+        },
+    },
+}
 
 TEMPLATES = [
     {
@@ -72,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
