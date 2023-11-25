@@ -11,9 +11,9 @@ from .views import CrearAcortador, paginaEnlace, RedirectEnlace, set_session, ge
 # Para la última dirección se espera un código de tipo string con la función Redirect
 app_name = 'core'
 urlpatterns = [
-    path('', CrearAcortador.as_view(), name='inicio'),
-    path('<int:pk>/', paginaEnlace.as_view(), name='detalle'),
-    path('<str:codigo>/', RedirectEnlace.as_view(), name='redirect'),
     path('set_session/', set_session, name='set_session'),
     path('get_session/', get_session, name='get_session'),
+    path('', CrearAcortador.as_view(), name='inicio'),
+    path('<int:pk>/', paginaEnlace.as_view(), name='detalle'),
+    path('8/<str:codigo>/', RedirectEnlace.as_view(), name='redirect'),
 ]
