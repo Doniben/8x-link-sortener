@@ -7,6 +7,18 @@ from .models import Enlace
 from datetime import datetime
 from django.http import HttpResponse
 
+# Defino rutas fuera de la lógica de la redirección y creación de links acortados para estas últimas no interfieran con nuevas rutas que se 
+# declararán, como las siguientes de pruebas y las correspondientes a i18n
+
+
+def set_session(request):
+    request.session['test_key'] = 'test_value'
+    return HttpResponse("Sesión establecida con éxito.")
+
+def get_session(request):
+    value = request.session.get('test_key', 'No encontrado')
+    return HttpResponse(f"Valor en sesión: {value}")
+
 # Se crea la primera vista y se hereda de CreateView y se le pasan 3 propiedades
 # asignamos el Enlace
 # asignamos el formulario creado de forma personalizada (AcortadorForm)
@@ -77,11 +89,3 @@ class RedirectEnlace(RedirectView):
             return Enlace.enlaces.decode_enlace(self.kwargs['codigo'])
         except IndexError:
             print("Decode sin datos")
-
-def set_session(request):
-    request.session['test_key'] = 'test_value'
-    return HttpResponse("Sesión establecida con éxito.")
-
-def get_session(request):
-    value = request.session.get('test_key', 'No encontrado')
-    return HttpResponse(f"Valor en sesión: {value}")
