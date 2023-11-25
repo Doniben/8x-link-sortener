@@ -15,6 +15,10 @@
               src="{% static 'assets/img/8x_social.png' %}"
               alt="8x logo"
           /></a>
+          <p>Idioma actual: {{ LANGUAGE_CODE }}</p>
+          <p>
+            {% trans "Hello, world!" %}
+          </p>
         </div>
         <div class="navbar-menu">
           <div class="navbar-end">
@@ -69,79 +73,42 @@
               </div>
               <div class="dropdown-menu" id="dropdown-menu" role="menu">
                 <div class="dropdown-content">
-                  <div class="dropdown-item is-hoverable">
-                    <div class="columns is-narrow">
-                      <form
-                        action="{% url 'set_language' %}"
-                        method="post"
-                        class="dropdown-item is-hoverable"
-                      >
-                        {% csrf_token %}
-                        <input
-                          name="next"
-                          type="hidden"
-                          value="{{ request.path }}"
-                        />
-                        <button
-                          type="submit"
-                          name="language"
-                          value="es"
-                          class="button is-text"
-                        >
-                          <div class="columns is-narrow">
-                            <div class="column is-narrow">
-                              <img
-                                src="{% static 'assets/img/illustrations/colombia-flag.png' %}"
-                                alt="Spanish"
-                                style="width: 20px"
-                              />
-                            </div>
-                            <div class="column">Spanish</div>
-                          </div>
-                        </button>
-                      </form>
-                    </div>
+                  <!-- Formulario para Español -->
+                  <div class="dropdown-item is-hoverable mt-2">
+                    <form action="{% url 'set_language' %}" method="post" class="columns is-mobile is-vcentered">
+                      {% csrf_token %}
+                      <input name="next" type="hidden" value="{{ request.path }}" />
+                      <button type="submit" name="language" value="es" class="button is-text">
+                        <img src="{% static 'assets/img/illustrations/colombia-flag.png' %}" alt="Spanish" style="width: 20px" />
+                        <span class="ml-2">Spanish</span>
+                      </button>
+                    </form>
                   </div>
-                  <div class="dropdown-item is-hoverable">
-                    <div class="columns is-narrow">
-                      <div class="column is-narrow">
-                        <img
-                          src="{% static 'assets/img/illustrations/esperanto-flag.png' %}"
-                          alt="Esperanto"
-                          style="width: 20px"
-                        />
-                      </div>
-                      <div class="column is-narrow">
-                        <a
-                          class="has-text-weight-bold is-clickable"
-                          href="{% url 'set_language' %}?language_code=eo"
-                        >
-                          Esperanto
-                        </a>
-                      </div>
-                    </div>
+                  <!-- Formulario para Esperanto -->
+                  <div class="dropdown-item is-hoverable mt-2">
+                    <form action="{% url 'set_language' %}" method="post" class="columns is-mobile is-vcentered">
+                      {% csrf_token %}
+                      <input name="next" type="hidden" value="{{ request.path }}" />
+                      <button type="submit" name="language" value="eo" class="button is-text">
+                        <img src="{% static 'assets/img/illustrations/esperanto-flag.png' %}" alt="Esperanto" style="width: 20px" />
+                        <span class="ml-2">Esperanto</span>
+                      </button>
+                    </form>
                   </div>
-                  <div class="dropdown-item is-hoverable">
-                    <div class="columns is-narrow">
-                      <div class="column is-narrow">
-                        <img
-                          src="{% static 'assets/img/illustrations/eeuu-flag.png' %}"
-                          alt="English"
-                          style="width: 20px"
-                        />
-                      </div>
-                      <div class="column is-narrow">
-                        <a
-                          class="has-text-weight-bold is-clickable"
-                          href="{% url 'set_language' %}?language_code=en"
-                        >
-                          English
-                        </a>
-                      </div>
-                    </div>
+                  <!-- Formulario para Inglés -->
+                  <div class="dropdown-item is-hoverable mt-2">
+                    <form action="{% url 'set_language' %}" method="post" class="columns is-mobile is-vcentered">
+                      {% csrf_token %}
+                      <input name="next" type="hidden" value="{{ request.path }}" />
+                      <button type="submit" name="language" value="en" class="button is-text">
+                        <img src="{% static 'assets/img/illustrations/eeuu-flag.png' %}" alt="English" style="width: 20px" />
+                        <span class="ml-2">English</span>
+                      </button>
+                    </form>
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -153,4 +120,9 @@
       </div>
     </nav>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("Idioma actual (navegador):", navigator.language);
+    });
+  </script>
 </section>
