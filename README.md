@@ -44,6 +44,7 @@ python manage.py makemessages -l es  # para español
 python manage.py makemessages -l en  # para inglés
 python manage.py makemessages -l eo  # para esperanto
 python manage.py compilemessages
+django-admin compilemessages -v 3# para procesar archivosd .po en .mo
 ```
 
 #### If errors with .mo files
