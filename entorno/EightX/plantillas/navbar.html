@@ -1,30 +1,128 @@
+{% load i18n %}
 <section id="hero" class="hero is-medium">
   <div class="hero-head">
     <nav class="navbar">
       <div class="container">
-          <div class="navbar-brand">
-            <a href="{% url 'core:inicio' %}" class="navbar-item" style="padding-left: 0px;">
-              {% load static %} <img class="is-large" src="{% static 'assets/img/8x_social.png' %}" alt="8x logo"></a>
-          </div>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <a href="/" class="navbar-item has-text-green a-menu">
-                HOME
-              </a>
-              <a class="navbar-item has-text-green a-menu">
-                ABOUT
-              </a>
-              <a class="navbar-item has-text-green a-menu">
-                USERS
-              </a>
+        <div class="navbar-brand">
+          <a
+            href="{% url 'core:inicio' %}"
+            class="navbar-item"
+            style="padding-left: 0px"
+          >
+            {% load static %}
+            <img
+              class="is-large"
+              src="{% static 'assets/img/8x_social.png' %}"
+              alt="8x logo"
+          /></a>
+          <p>Idioma actual: {{ LANGUAGE_CODE }}</p>
+          <p>
+            {% trans "Hello, world!" %}
+          </p>
+        </div>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a href="/" class="navbar-item has-text-green a-menu">
+              {% trans "HOME" %}
+            </a>
+            <a class="navbar-item has-text-green a-menu">
+              {% trans "ABOUT" %}
+            </a>
+            <a class="navbar-item has-text-green a-menu">
+              {% trans "USERS" %}
+            </a>
+            <div class="dropdown is-hoverable is-borderless">
+              <div class="dropdown-trigger">
+                <button
+                  class="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                >
+                  <!-- Icono de la bandera del idioma actual -->
+                  {% if LANGUAGE_CODE == 'es' %}
+                  <img
+                    src="{% static 'assets/img/illustrations/colombia-flag.png' %}"
+                    alt="Spanish"
+                    style="width: 20px"
+                  />
+                  {% elif LANGUAGE_CODE == 'eo' %}
+                  <img
+                    src="{% static 'assets/img/illustrations/esperanto-flag.png' %}"
+                    alt="Esperanto"
+                    style="width: 20px"
+                  />
+                  {% elif LANGUAGE_CODE == 'en' %}
+                  <img
+                    src="{% static 'assets/img/illustrations/eeuu-flag.png' %}"
+                    alt="English"
+                    style="width: 20px"
+                  />
+                  {% else %}
+                  <!-- Por defecto, mostrar la bandera de Estados Unidos -->
+                  <img
+                    src="{% static 'assets/img/illustrations/eeuu-flag.png' %}"
+                    alt="English"
+                    style="width: 20px"
+                  />
+                  {% endif %}
+                  <!-- Icono de flecha hacia abajo -->
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <!-- Formulario para Español -->
+                  <div class="dropdown-item is-hoverable mt-2">
+                    <form action="{% url 'set_language' %}" method="post" class="columns is-mobile is-vcentered">
+                      {% csrf_token %}
+                      <input name="next" type="hidden" value="{{ request.path }}" />
+                      <button type="submit" name="language" value="es" class="button is-text">
+                        <img src="{% static 'assets/img/illustrations/colombia-flag.png' %}" alt="Spanish" style="width: 20px" />
+                        <span class="ml-2">Spanish</span>
+                      </button>
+                    </form>
+                  </div>
+                  <!-- Formulario para Esperanto -->
+                  <div class="dropdown-item is-hoverable mt-2">
+                    <form action="{% url 'set_language' %}" method="post" class="columns is-mobile is-vcentered">
+                      {% csrf_token %}
+                      <input name="next" type="hidden" value="{{ request.path }}" />
+                      <button type="submit" name="language" value="eo" class="button is-text">
+                        <img src="{% static 'assets/img/illustrations/esperanto-flag.png' %}" alt="Esperanto" style="width: 20px" />
+                        <span class="ml-2">Esperanto</span>
+                      </button>
+                    </form>
+                  </div>
+                  <!-- Formulario para Inglés -->
+                  <div class="dropdown-item is-hoverable mt-2">
+                    <form action="{% url 'set_language' %}" method="post" class="columns is-mobile is-vcentered">
+                      {% csrf_token %}
+                      <input name="next" type="hidden" value="{{ request.path }}" />
+                      <button type="submit" name="language" value="en" class="button is-text">
+                        <img src="{% static 'assets/img/illustrations/eeuu-flag.png' %}" alt="English" style="width: 20px" />
+                        <span class="ml-2">English</span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
             </div>
           </div>
-          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
+        </div>
+        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
       </div>
     </nav>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("Idioma actual (navegador):", navigator.language);
+    });
+  </script>
 </section>

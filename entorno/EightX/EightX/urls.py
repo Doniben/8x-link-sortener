@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.i18n import set_language
 
 # Se crea una nueva función llamada include. Por ella se crea un nuevo path
 # El path es una dirección que coincide tanto en el navegador como con la que se crea dentro del archivo url
@@ -26,6 +27,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', include('core.urls')),
     path('a/admin/', admin.site.urls),
 ]
